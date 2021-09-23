@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # The binaries to build (just the basenames)
-BINS := go-api-example
+BINS := parser
 
 # Where to push the docker image.
 REGISTRY ?= example.com
