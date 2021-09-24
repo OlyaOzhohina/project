@@ -152,11 +152,6 @@ go-build: $(BUILD_DIRS)
 	        ./build/build.sh                                    \
 	    "
 
-lint: 
-	@echo "start linting..."
-	@./build/lint.sh
-	@echo "linting finished."
-
 # Example: make shell CMD="-c 'date > datefile'"
 shell: # @HELP launches a shell in the containerized build environment
 shell: $(BUILD_DIRS)
@@ -240,29 +235,6 @@ version: # @HELP outputs the version string
 version:
 	@echo $(VERSION)
 
-test: # @HELP runs tests, as defined in ./build/test.sh
-test: $(BUILD_DIRS)
-	@docker run                                                 \
-	    -i                                                      \
-	    --rm                                                    \
-	    -u $$(id -u):$$(id -g)                                  \
-	    -v $$(pwd):/src                                         \
-	    -w /src                                                 \
-	    -v $$(pwd)/.go/bin/$(OS)_$(ARCH):/go/bin                \
-	    -v $$(pwd)/.go/bin/$(OS)_$(ARCH):/go/bin/$(OS)_$(ARCH)  \
-	    -v $$(pwd)/.go/cache:/.cache                            \
-	    -v $$(pwd)/.go/pkg:/go/pkg                              \
-	    --env HTTP_PROXY=$(HTTP_PROXY)                          \
-	    --env HTTPS_PROXY=$(HTTPS_PROXY)                        \
-	    $(BUILD_IMAGE)                                          \
-	    /bin/sh -c "                                            \
-	        ARCH=$(ARCH)                                        \
-	        OS=$(OS)                                            \
-	        VERSION=$(VERSION)                                  \
-	        MOD=$(MOD)                                          \
-	        ./build/test.sh $(SRC_DIRS)                         \
-	    "
-
 $(BUILD_DIRS):
 	@mkdir -p $@
 
@@ -275,18 +247,30 @@ container-clean:
 bin-clean:
 	rm -rf .go bin
 
-help: # @HELP prints this message
-help:
-	@echo "VARIABLES:"
-	@echo "  BINS = $(BINS)"
-	@echo "  OS = $(OS)"
-	@echo "  ARCH = $(ARCH)"
-	@echo "  MOD = $(MOD)"
-	@echo "  REGISTRY = $(REGISTRY)"
-	@echo
-	@echo "TARGETS:"
-	@grep -E '^.*: *# *@HELP' $(MAKEFILE_LIST)    \
-	    | awk '                                   \
-	        BEGIN {FS = ": *# *@HELP"};           \
-	        { printf "  %-30s %s\n", $$1, $$2 };  \
-	    '
+PARSER_CONTAINER := go-parser
+PARSER_DIR=./cmd/parser
+COPY_DIR=~/docker_copies/
+
+build-container:
+	@sh ./build/build_docker.sh
+
+container-scrap:
+	@echo "Start scrapping..."
+	@go run $(PARSER_DIR)/main.go
+
+copy:
+	@sh ./build/copy.sh
+
+start-container:
+	@echo "running container..."
+	@docker run -d --name $(PARSER_CONTAINER) $(PARSER_CONTAINER) sleep 38768
+	@echo "container is up!"
+
+scrap:
+	@docker exec -ti $(PARSER_CONTAINER) make container-scrap
+
+lint: 
+	@echo "start linting..."
+	@./build/lint.sh
+	@echo "linting finished."
+

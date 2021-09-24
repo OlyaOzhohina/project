@@ -3,7 +3,11 @@ module github.com/OlyaOzhohina/project/parser
 go 1.17
 
 require (
-	github.com/PuerkitoBio/goquery v1.7.1 // indirect
+	github.com/PuerkitoBio/goquery v1.7.1
+	github.com/geziyor/geziyor v0.0.0-20210830182932-110394a75314
+)
+
+require (
 	github.com/VividCortex/gohistogram v1.0.0 // indirect
 	github.com/andybalholm/cascadia v1.3.1 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
@@ -11,7 +15,6 @@ require (
 	github.com/chromedp/cdproto v0.0.0-20210921215903-b0b4414ddbe0 // indirect
 	github.com/chromedp/chromedp v0.7.4 // indirect
 	github.com/chromedp/sysutil v1.0.0 // indirect
-	github.com/geziyor/geziyor v0.0.0-20210830182932-110394a75314 // indirect
 	github.com/go-kit/kit v0.11.0 // indirect
 	github.com/gobwas/httphead v0.1.0 // indirect
 	github.com/gobwas/pool v0.2.1 // indirect
