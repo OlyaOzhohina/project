@@ -50,8 +50,8 @@ model QuestionReply {
   created_at  DateTime @default(now())
   updated_at  DateTime @default(now())
 
-  question Question @relation(fields: [question_id], references: [id])
-  reply    Reply    @relation(fields: [reply_id], references: [id])
+  Question Question @relation(fields: [question_id], references: [id])
+  Reply    Reply    @relation(fields: [reply_id], references: [id])
 
   @@id([question_id, reply_id])
 }
