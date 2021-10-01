@@ -9,6 +9,7 @@ then
   mkdir ./parser_results
   echo "Directory created!"
 fi
+
 echo "Copy file to: ./parser_results"
 docker cp $PARSER_CONTAINER:/parser/out.json ./parser_results
 cat "./parser_results/out.json"
