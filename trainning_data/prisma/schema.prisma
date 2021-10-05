@@ -1,0 +1,57 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-py"
+}
+
+model Author {
+  id         Int      @id @default(autoincrement())
+  name       String   @unique
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+
+  Quote Quote[]
+}
+
+model Quote {
+  id         Int      @id @default(autoincrement())
+  author_id  Int
+  text       String
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+
+  Author Author @relation(fields: [author_id], references: [id])
+}
+
+model Question {
+  id         Int      @id @default(autoincrement())
+  text       String
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+
+  QuestionReply QuestionsOnReplys[]
+}
+
+model Reply {
+  id         Int      @id @default(autoincrement())
+  text       String
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+
+  QuestionReply QuestionsOnReplys[]
+}
+
+model QuestionsOnReplys {
+  question_id Int
+  reply_id    Int
+  created_at  DateTime @default(now())
+  updated_at  DateTime @default(now())
+
+  Question Question @relation(fields: [question_id], references: [id])
+  Reply    Reply    @relation(fields: [reply_id], references: [id])
+
+  @@id([question_id, reply_id])
+}
