@@ -23,12 +23,21 @@ Start container by running:
 make start-container
 ```
 
-### Run scrapper
-
-To run scrapper execute following command:
+### Build executable file
 
 ```bash
-make scrap
+make build-executable
+```
+
+### Run scrapper
+
+There are a few web pages we could parse from.
+Each web page has it's own command.
+
+#### Parse from wiki quotes
+
+```bash
+make scrap-wiki-quotes
 ```
 
 ### Copy result file to your local machine

@@ -1,4 +1,4 @@
-FROM golang:1.17.1-alpine3.14 as go
+FROM golang:1.17.1-alpine3.14
 
 WORKDIR /parser
 
