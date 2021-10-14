@@ -44,6 +44,14 @@ make scrap-wiki-quotes
 
 To copy result file from docker container run this command:
 
+#### Unix
+
 ```bash
 make copy
+```
+
+#### Windows
+
+```bash
+make copy-windows
 ```

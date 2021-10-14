@@ -24,6 +24,9 @@ scrap-wiki-quotes:
 copy:
 	@sh ./build/copy.sh
 
+copy-windows:
+	@sh ./build/copy-win.sh
+
 lint: 
 	@echo "start linting..."
 	@./build/lint.sh
