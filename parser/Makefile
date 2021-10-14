@@ -14,12 +14,12 @@ start-container:
 
 build-executable:
 	@echo "building parser..."
-	@docker exec -ti $(PARSER_CONTAINER) go build -o $(PARSER_BUILD_FILE) $(PARSER_DIR)/main.go
+	@docker exec -i $(PARSER_CONTAINER) go build -o $(PARSER_BUILD_FILE) $(PARSER_DIR)/main.go
 	@echo "parser built"
 
 scrap-wiki-quotes:
 	@echo "start scrapping from $(SCRAP_URL_WIKI)..."
-	@docker exec -ti $(PARSER_CONTAINER) ./parser parse --url $(SCRAP_URL_WIKI) --from wiki-quotes
+	@docker exec -i $(PARSER_CONTAINER) ./parser parse --url $(SCRAP_URL_WIKI) --from wiki-quotes
 
 copy:
 	@sh ./build/copy.sh
