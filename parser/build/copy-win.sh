@@ -11,6 +11,6 @@ then
 fi
 
 echo "Copy file to: ./parser_results"
-docker cp $PARSER_CONTAINER:/parser/out.json d:\collocutor\project\parser\parser_results
+winpty docker cp $PARSER_CONTAINER:/parser/out.json d:\collocutor\project\parser\parser_results
 cat "./parser_results/out.json"
 echo "file copied."

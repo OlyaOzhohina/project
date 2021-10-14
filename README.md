@@ -29,6 +29,12 @@ make start-container
 make build-executable
 ```
 
+#### build executable git bash
+
+```bash
+make build-executable-bash
+```
+
 ### Run scrapper
 
 There are a few web pages we could parse from.
@@ -36,8 +42,16 @@ Each web page has it's own command.
 
 #### Parse from wiki quotes
 
+#### parse on unix
+
 ```bash
 make scrap-wiki-quotes
+```
+
+#### parse git bash
+
+```bash
+make scrap-wiki-quotes-bash
 ```
 
 ### Copy result file to your local machine

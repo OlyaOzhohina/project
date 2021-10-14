@@ -17,6 +17,15 @@ build-executable:
 	@docker exec -i $(PARSER_CONTAINER) go build -o $(PARSER_BUILD_FILE) $(PARSER_DIR)/main.go
 	@echo "parser built"
 
+build-executable-bash:
+	@echo "building parser..."
+	@winpty docker exec -i $(PARSER_CONTAINER) go build -o $(PARSER_BUILD_FILE) $(PARSER_DIR)/main.go
+	@echo "parser built"
+
+scrap-wiki-quotes-bash:
+	@echo "start scrapping from $(SCRAP_URL_WIKI)..."
+	@winpty docker exec -i $(PARSER_CONTAINER) ./parser parse --url $(SCRAP_URL_WIKI) --from wiki-quotes
+
 scrap-wiki-quotes:
 	@echo "start scrapping from $(SCRAP_URL_WIKI)..."
 	@docker exec -i $(PARSER_CONTAINER) ./parser parse --url $(SCRAP_URL_WIKI) --from wiki-quotes
@@ -24,7 +33,7 @@ scrap-wiki-quotes:
 copy:
 	@sh ./build/copy.sh
 
-copy-windows:
+copy-bash:
 	@sh ./build/copy-win.sh
 
 lint: 
