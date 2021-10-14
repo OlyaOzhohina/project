@@ -4,7 +4,7 @@ set -o nounset
 
 export PARSER_CONTAINER=go-parser
 
-if [ "$(docker ps -a | grep ${PARSER_CONTAINER})" ]
+if [ "$(docker ps | grep ${PARSER_CONTAINER})" ]
 then	  
     echo "killing existing image..."
     docker kill "${PARSER_CONTAINER}"
