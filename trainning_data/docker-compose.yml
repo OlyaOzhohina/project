@@ -12,7 +12,4 @@ services:
       - PGUSER=postgres
       - POSTGRES_PASSWORD=root
     volumes:
-      - my-db-postgres:/var/lib/postgresql/data
-
-volumes:
-  my-db-postgres:
+      - ./db_data/psql:/var/lib/postgresql/data
