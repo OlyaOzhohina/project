@@ -13,3 +13,17 @@ services:
       - POSTGRES_PASSWORD=root
     volumes:
       - ./db_data/psql:/var/lib/postgresql/data
+  bot:
+    container_name: jesus_bot
+    tty: true
+    depends_on:
+      - db
+    links:
+      - db
+    build: .
+    env_file:
+      - .env
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/app
