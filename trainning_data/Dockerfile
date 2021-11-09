@@ -9,7 +9,7 @@ RUN pip3 install pipenv
 COPY ./Pipfile .
 COPY ./Pipfile.lock .
 
-RUN pipenv install --system --deploy --ignore-pipfile
+RUN pipenv install --system --deploy
 
 COPY . .
 
